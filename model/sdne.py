@@ -11,6 +11,7 @@ class SDNE:
         self.is_variables_init = False
         self.config = config 
         ######### not running out gpu sources ##########
+        #tf_config = tf.ConfigProto(log_device_placement=True) # debug
         tf_config = tf.ConfigProto()
         tf_config.gpu_options.allow_growth = True
         self.sess = tf.Session(config =  tf_config)

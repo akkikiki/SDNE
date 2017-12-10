@@ -3,7 +3,7 @@ import tensorflow as tf
 import time
 import copy
 import random
-from rbm import *
+from .rbm import *
 
 class SDNE:
     def __init__(self, config):
@@ -136,7 +136,7 @@ class SDNE:
                         for k in range(len(myRBMs) - 1):
                             mini_batch = myRBMs[k].getH(mini_batch)
                         error += myRBM.fit(mini_batch)
-                    print "rbm epochs:", epoch, "error : ", error
+                    print("rbm epochs:", epoch, "error : ", error)
 
                 W, bv, bh = myRBM.getWb()
                 name = "encoder" + str(i)

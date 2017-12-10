@@ -44,11 +44,11 @@ if __name__ == "__main__":
         mini_batch = graph_data.sample(config.batch_size)
         loss = model.fit(mini_batch)
         batch_n += 1
-        print "Epoch : %d, batch : %d, loss: %.3f" % (epochs, batch_n, loss)
+        print("Epoch : %d, batch : %d, loss: %.3f" % (epochs, batch_n, loss))
         if graph_data.is_epoch_end:
             epochs += 1
             batch_n = 0
-            print "Epoch : %d loss : %.3f" % (epochs, loss)
+            print("Epoch : %d loss : %.3f" % (epochs, loss))
             if epochs % config.display == 0:
                 embedding = None
                 while (True):
@@ -68,7 +68,7 @@ if __name__ == "__main__":
                 print >> fout, epochs, result
                 sio.savemat(config.embedding_filename + '-' + str(epochs) + '_embedding.mat',{'embedding':embedding})
             if epochs > config.epochs_limit:
-                print "exceed epochs limit terminating"
+                print("exceed epochs limit terminating")
                 break
             last_loss = loss
         

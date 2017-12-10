@@ -16,7 +16,7 @@ class rbm:
         init_op = tf.global_variables_initializer()
         self.sess.run(init_op)
         self.buildModel()
-        print "rbm init completely"
+        print("rbm init completely")
         pass
 
     def buildModel(self):

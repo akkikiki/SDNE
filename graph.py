@@ -32,14 +32,14 @@ class Graph(object):
                 self.__negativeSample(int(ng_sample_ratio*self.N), count, self.adj_matrix.copy())
             self.order = np.arange(self.N)
             self.adj_matrix = self.adj_matrix.tocsr()
-            print "getData done"
-            print "Vertexes : %d  Edges : %d ngSampleRatio: %f" % (self.N, self.E, ng_sample_ratio)
+            print("getData done")
+            print("Vertexes : %d  Edges : %d ngSampleRatio: %f" % (self.N, self.E, ng_sample_ratio))
         else:
             pass
             #TODO read a mat file or something like that.
         
     def __negativeSample(self, ngSample, count, edges):
-        print "negative Sampling"
+        print("negative Sampling")
         size = 0
         while (size < ngSample):
             xx = random.randint(0, self.N-1)
@@ -50,7 +50,7 @@ class Graph(object):
             edges[yy][xx] = -1
             self.links[size + count] = [xx, yy, -1]
             size += 1
-        print "negative Sampling done"
+        print("negative Sampling done")
         
     def load_label_data(self, filename):
         with open(filename,"r") as fin:
@@ -109,7 +109,7 @@ class Graph(object):
             self.links = new_links
             self.order = self.order.keys()
             self.N = new_N
-            print len(self.links)
+            print(len(self.links))
             return self
         elif method == "node":
             self.adj_matrix = np.zeros([self.N, self.N], np.int_)
@@ -128,7 +128,7 @@ class Graph(object):
             self.order = self.order.keys()
             self.N = new_N
             self.links = new_links
-            print len(self.links)
+            print(len(self.links))
             return self
             pass
         elif method == "explore": 
@@ -153,7 +153,7 @@ class Graph(object):
             self.adj_matrix = new_adj_matrix
             self.N = new_N
             self.links = new_links
-            print len(self.links)
+            print(len(self.links))
             return self
             pass
     

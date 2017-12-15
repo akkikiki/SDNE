@@ -2,10 +2,12 @@ class Config(object):
     def __init__(self):
         ## graph data
         #self.file_path = "../Data_SDNE/Flickr2_1.txt"
-        self.file_path = "GraphData/blogCatalog3.txt"
+        #self.file_path = "GraphData/blogCatalog3.txt"
+        self.file_path = "GraphData/A_10_nn_eng.txt"
         #self.label_file_path = "GraphData/blogCatalog3-groups.txt"
         ## embedding data
-        self.embedding_filename = "embeddingResult/blogCatolog" 
+        #self.embedding_filename = "embeddingResult/blogCatolog" 
+        self.embedding_filename = "embeddingResult/eng_wikipedia.txt" 
         ## hyperparameter
         self.struct = [None, 1000, 128]
         ## the loss func is  // gamma * L1 + alpha * L2 + reg * regularTerm // 

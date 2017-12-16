@@ -9,7 +9,9 @@ class Config(object):
         #self.embedding_filename = "embeddingResult/blogCatolog" 
         self.embedding_filename = "embeddingResult/eng_wikipedia.txt" 
         ## hyperparameter
-        self.struct = [None, 1000, 128]
+        #self.struct = [None, 1000, 128]
+        #self.struct = [None, 500, 100]
+        self.struct = [None, 500, 10]
         ## the loss func is  // gamma * L1 + alpha * L2 + reg * regularTerm // 
         self.alpha = 500
         self.gamma = 1
@@ -19,14 +21,17 @@ class Config(object):
         
         ## para for training
         #self.rN = 0.9
-        self.batch_size = 64
-        self.epochs_limit = 10
+        self.batch_size = 128
+        self.epochs_limit = 5
+        #self.epochs_limit = 1
         self.learning_rate = 0.01
         self.display = 1
 
         self.DBN_init = True
-        self.dbn_epochs = 500
-        self.dbn_batch_size = 64
+        #self.dbn_epochs = 500
+        self.dbn_epochs = 20
+        #self.dbn_epochs = 1
+        self.dbn_batch_size = 128
         self.dbn_learning_rate = 0.1
 
         self.sparse_dot = False

@@ -19,21 +19,35 @@ def getSimilarity(result):
 def check_link_reconstruction(embedding, graph_data, check_index):
     def get_precisionK(embedding, data, max_index):
         print("get precisionK...")
-        similarity = getSimilarity(embedding).reshape(-1)
-        sortedInd = np.argsort(similarity)
+        #similarity = getSimilarity(embedding).reshape(-1)
+        similarity = getSimilarity(embedding).reshape(-1).astype(np.float16)
+        print("got similarity")
+        #print(type(similarity))
+        #sortedInd = np.argsort(similarity)
+        #topKInd = np.argpartition(-similarity, check_index)[:]
+        #sortedInd = np.argpartition(similarity, range(max_index))[:max_index]
+        #topK = 10
+        topK = max_index
+        sortedInd = []
+        for i in range(topK):
+            Ind = np.argmax(similarity)
+            similarity[Ind] = 0
+            sortedInd.insert(0, Ind)
         cur = 0
         count = 0
         precisionK = []
-        sortedInd = sortedInd[::-1]
+        sortedInd = sortedInd[::-1] # reverse
         for ind in sortedInd:
             x = ind / data.N
             y = ind % data.N
             count += 1
+            print("converting adjacent matrix...")
             if (data.adj_matrix[x].toarray()[0][y] == 1 or x == y):
                 cur += 1 
             precisionK.append(1.0 * cur / count)
             if count > max_index:
                 break
+            print("prec@K computation done...")
         return precisionK
         
     precisionK = get_precisionK(embedding, graph_data, np.max(check_index))
@@ -47,7 +61,7 @@ def check_link_reconstruction(embedding, graph_data, check_index):
 def check_multi_label_classification(X, Y, test_ratio = 0.9):
     def small_trick(y_test, y_pred):
         y_pred_new = np.zeros(y_pred.shape,np.bool)
-        sort_index = np.flip(np.argsort(y_pred, axis = 1), 1)
+        sort_index = np.flip(np.argsort(y_pred, axis = 1), 1, 10)
         for i in range(y_test.shape[0]):
             num = sum(y_test[i])
             for j in range(num):

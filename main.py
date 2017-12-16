@@ -21,6 +21,7 @@ from utils.utils import *
 import scipy.io as sio
 import time
 import copy
+import pickle
 
 
 if __name__ == "__main__":
@@ -62,11 +63,15 @@ if __name__ == "__main__":
                     if graph_data.is_epoch_end:
                         break
 
-                result = check_link_reconstruction(embedding, graph_data, [20000,40000,60000,80000,100000])
+                #result = check_link_reconstruction(embedding, graph_data, [20000,40000,60000,80000,100000])
+                #result = check_link_reconstruction(embedding, graph_data, [200,400,600,800,1000])
+                result = check_link_reconstruction(embedding, graph_data, [1, 5, 10, 20])
                 #data = origin_data.sample(origin_data.N, with_label = True)
                 #check_multi_label_classification(model.get_embedding(data), data.label)
-                print >> fout, epochs, result
+                #print >> fout, epochs, result
+                print(result)
                 sio.savemat(config.embedding_filename + '-' + str(epochs) + '_embedding.mat',{'embedding':embedding})
+                pickle.dump(embedding, open(config.embedding_filename + '-' + str(epochs) + '_embedding.npy', 'wb'))
             if epochs > config.epochs_limit:
                 print("exceed epochs limit terminating")
                 break
